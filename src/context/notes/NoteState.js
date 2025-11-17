@@ -3,7 +3,7 @@ import NoteContext from "./noteContext";
 
 const NoteState = (props) => {
 	const s1 = {
-		name: "NoteState",
+		name: "Anjali",
 		class: "5A",
 	};
 
