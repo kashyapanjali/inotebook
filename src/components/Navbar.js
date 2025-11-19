@@ -1,15 +1,22 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 function Navbar() {
+	let location = useLocation();
+
+	React.useEffect(() => {
+		// path verify
+		console.log("Current location:", location.pathname);
+	}, [location]);
+
 	return (
 		<div>
-			<nav className='navbar navbar-expand-lg bg-body-tertiary'>
+			<nav className='navbar navbar-expand-lg navbar-dark bg-dark'>
 				<div className='container-fluid'>
 					<Link
 						className='navbar-brand'
 						to='/'>
-						Navbar
+						iNotebook
 					</Link>
 					<button
 						className='navbar-toggler'
@@ -27,15 +34,16 @@ function Navbar() {
 						<ul className='navbar-nav me-auto mb-2 mb-lg-0'>
 							<li className='nav-item'>
 								<Link
-									className='nav-link active'
+									className={`nav-link${location.pathname === "/" ? " active" : ""}`}
 									aria-current='page'
 									to='/'>
 									Home
 								</Link>
 							</li>
+
 							<li className='nav-item'>
 								<Link
-									className='nav-link'
+									className={`nav-link${location.pathname === "/about" ? " active" : ""}`}
 									to='/about'>
 									About
 								</Link>
