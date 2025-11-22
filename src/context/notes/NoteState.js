@@ -76,8 +76,16 @@ const NoteState = (props) => {
 	};
 
 	//Edit a Note
-	const editNote = () => {
-		console.log("edit a note" + id, title, description, tag);
+	const editNote = (id, title, description, tag) => {
+
+		for(let i=0; i<notes.length; i++){
+		  const element = notes[i];	
+		  if(element._id===id){
+			element.title=title;
+			element.description=description;
+			element.tag=tag;
+		  }
+		console.log("edit a note");
 	};
 	return (
 		<NoteContext.Provider value={{ notes, addNote, setNotes }}>
