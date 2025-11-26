@@ -54,23 +54,26 @@ function AddNote() {
 						onChange={onChange}
 					/>
 				</div>
-				<div className='mb-3 form-check'>
-					<input
-						type='checkbox'
-						className='form-check-input'
-						id='exampleCheck1'
-					/>
+				<div className='mb-3'>
 					<label
-						className='form-check-label'
-						htmlFor='exampleCheck1'>
-						Check me out
+						htmlFor='tag'
+						className='form-label'>
+						Description
 					</label>
+					<input
+						type='text'
+						className='form-control'
+						id='tag'
+						name='tag'
+						aria-describedby='descHelp'
+						onChange={onChange}
+					/>
 				</div>
 				<button
 					type='submit'
 					className='btn btn-primary'
 					onClick={handleClick}>
-					Submit
+					Add Note
 				</button>
 			</form>
 		</div>
