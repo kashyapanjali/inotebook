@@ -60,27 +60,36 @@ const NoteState = (props) => {
 
 	//Edit a Note
 	const editNote = async (id, title, description, tag) => {
-		const response = await fetch(`${url}/v1/notes/updatenote/${id}`, {
-			method: "PUT",
-			headers: {
-				"Content-Type": "application/json",
-				"auth-token":
-					"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjkwZjFkOGI5OGZmYjVjZjY0YjM1YjA5In0sImlhdCI6MTc2MjYwMjA4NH0.ju1WBTnSjRWF_K5NM1WZq1bWQURhSp1UBTsBavV4IFU",
-			},
-			body: JSON.stringify({ title, description, tag }),
-		});
+		try {
+			const response = await fetch(`${url}/v1/notes/updatenote/${id}`, {
+				method: "PUT",
+				headers: {
+					"Content-Type": "application/json",
+					"auth-token":
+						"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjkwZjFkOGI5OGZmYjVjZjY0YjM1YjA5In0sImlhdCI6MTc2MjYwMjA4NH0.ju1WBTnSjRWF_K5NM1WZq1bWQURhSp1UBTsBavV4IFU",
+				},
+				body: JSON.stringify({ title, description, tag }),
+			});
 
-		const json = await response.json();
+			const json = await response.json();
 
-		console.log(json);
-
-		const newNotes = notes.map((note) => {
-			if (note._id === id) {
-				return json;
+			if (!response.ok) {
+				console.error("Error updating note:", json);
+				return;
 			}
-			return note;
-		});
-		setNotes(newNotes);
+
+			console.log("Note updated successfully:", json);
+
+			const newNotes = notes.map((note) => {
+				if (note._id === id) {
+					return json;
+				}
+				return note;
+			});
+			setNotes(newNotes);
+		} catch (error) {
+			console.error("Error updating note:", error);
+		}
 	};
 
 	return (
