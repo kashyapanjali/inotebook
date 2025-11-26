@@ -9,7 +9,7 @@ const NoteState = (props) => {
 
 	//get all Notes
 	const getNotes = async () => {
-		const response = await fetch(`${url}/v1/notes/fetchallnotes`, {
+		const response = await fetch(`${url}/v1/notes/fetchallnote`, {
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json",
@@ -23,8 +23,8 @@ const NoteState = (props) => {
 		console.log(json);
 	};
 	//Add a Note
-	const addNote = async (id, title, description, tag) => {
-		const response = await fetch(`${url}/v1/notes/createnote/${id}`, {
+	const addNote = async (title, description, tag) => {
+		const response = await fetch(`${url}/v1/notes/createnote`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -37,22 +37,12 @@ const NoteState = (props) => {
 		const json = await response.json();
 
 		console.log("Adding a new note", json);
-		const note = {
-			_id: "69196804b9198694dabe5aa2",
-			user: "690f1d8b98ffb5cf64b35b09",
-			title: title,
-			description: description,
-			tag: tag,
-			date: "2025-11-16T05:58:28.768Z",
-			__v: 1,
-		};
-
-		setNotes((prevNotes) => prevNotes.concat(note));
+		setNotes((prevNotes) => [...prevNotes, json]);
 	};
 	//Delete a Note
 	const deleteNote = async (id) => {
 		const response = await fetch(`${url}/v1/notes/deletenote/${id}`, {
-			method: "POST",
+			method: "DELETE",
 			headers: {
 				"Content-Type": "application/json",
 				"auth-token":
@@ -84,22 +74,21 @@ const NoteState = (props) => {
 
 		console.log(json);
 
-		for (let i = 0; i < notes.length; i++) {
-			const element = notes[i];
-			if (element._id === id) {
-				element.title = title;
-				element.description = description;
-				element.tag = tag;
+		const newNotes = notes.map((note) => {
+			if (note._id === id) {
+				return json;
 			}
-			console.log("edit a note");
-		}
-		return (
-			<NoteContext.Provider
-				value={{ notes, addNote, setNotes, deleteNote, getNotes, editNote }}>
-				{props.children}
-			</NoteContext.Provider>
-		);
+			return note;
+		});
+		setNotes(newNotes);
 	};
+
+	return (
+		<NoteContext.Provider
+			value={{ notes, addNote, setNotes, deleteNote, getNotes, editNote }}>
+			{props.children}
+		</NoteContext.Provider>
+	);
 };
 
 export default NoteState;

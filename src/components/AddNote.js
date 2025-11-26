@@ -8,7 +8,7 @@ function AddNote() {
 	const [note, setNote] = useState({
 		title: "",
 		description: "",
-		tag: "default",
+		tag: "",
 	});
 
 	const handleClick = (e) => {
@@ -35,6 +35,7 @@ function AddNote() {
 						className='form-control'
 						id='title'
 						name='title'
+						value={note.title}
 						aria-describedby='titleHelp'
 						onChange={onChange}
 					/>
@@ -50,6 +51,7 @@ function AddNote() {
 						className='form-control'
 						id='description'
 						name='description'
+						value={note.description}
 						aria-describedby='descHelp'
 						onChange={onChange}
 					/>
@@ -58,13 +60,14 @@ function AddNote() {
 					<label
 						htmlFor='tag'
 						className='form-label'>
-						Description
+						Tag
 					</label>
 					<input
 						type='text'
 						className='form-control'
 						id='tag'
 						name='tag'
+						value={note.tag}
 						aria-describedby='descHelp'
 						onChange={onChange}
 					/>
