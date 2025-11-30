@@ -53,7 +53,9 @@ function Notes() {
 				style={{ display: showModal ? "block" : "none" }}
 				tabIndex='-1'
 				role='dialog'>
-				<div className='modal-dialog' role='document'>
+				<div
+					className='modal-dialog'
+					role='document'>
 					<div className='modal-content'>
 						<div className='modal-header'>
 							<h5 className='modal-title'>Edit Note</h5>
@@ -140,6 +142,9 @@ function Notes() {
 			)}
 			<div className='row my-3'>
 				<h2>Your Notes</h2>
+				<div className='container mx-2'>
+					{notes.length === 0 && "No notes to display"}
+				</div>
 				{notes.map((note) => {
 					return (
 						<NoteItem

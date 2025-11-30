@@ -20,7 +20,6 @@ const NoteState = (props) => {
 
 		const json = await response.json();
 		setNotes(json);
-		console.log(json);
 	};
 	//Add a Note
 	const addNote = async (title, description, tag) => {
@@ -35,8 +34,6 @@ const NoteState = (props) => {
 		});
 
 		const json = await response.json();
-
-		console.log("Adding a new note", json);
 		setNotes((prevNotes) => [...prevNotes, json]);
 	};
 	//Delete a Note
@@ -51,7 +48,6 @@ const NoteState = (props) => {
 		});
 
 		const json = await response.json();
-		console.log(json);
 		const newNotes = notes.filter((note) => {
 			return note._id !== id;
 		});
@@ -77,9 +73,6 @@ const NoteState = (props) => {
 				console.error("Error updating note:", json);
 				return;
 			}
-
-			console.log("Note updated successfully:", json);
-
 			const newNotes = notes.map((note) => {
 				if (note._id === id) {
 					return json;

@@ -35,6 +35,7 @@ function AddNote() {
 						className='form-control'
 						id='title'
 						name='title'
+						minLength={15}
 						value={note.title}
 						aria-describedby='titleHelp'
 						onChange={onChange}
@@ -51,6 +52,7 @@ function AddNote() {
 						className='form-control'
 						id='description'
 						name='description'
+						minLength={15}
 						value={note.description}
 						aria-describedby='descHelp'
 						onChange={onChange}
