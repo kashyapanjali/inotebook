@@ -3,7 +3,7 @@ import NoteItem from "./NoteItem";
 import NoteContext from "../context/notes/noteContext";
 import AddNote from "./AddNote";
 
-function Notes() {
+function Notes(props) {
 	const context = useContext(NoteContext);
 	const { notes, getNotes, editNote } = context;
 	const [showModal, setShowModal] = useState(false);
@@ -41,12 +41,13 @@ function Notes() {
 	const handleUpdate = (e) => {
 		e.preventDefault();
 		editNote(note.id, note.title, note.description, note.tag);
+		props.showAlert("Note updated successfully", "success");
 		handleClose();
 	};
 
 	return (
 		<>
-			<AddNote />
+			<AddNote showAlert={props.showAlert} />
 			{/* Edit Note Modal */}
 			<div
 				className={`modal fade ${showModal ? "show" : ""}`}
@@ -151,6 +152,7 @@ function Notes() {
 							key={note._id}
 							note={note}
 							handleEditClick={handleEditClick}
+							showAlert={props.showAlert}
 						/>
 					);
 				})}

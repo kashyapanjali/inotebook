@@ -1,11 +1,17 @@
 import React from "react";
 
-function Alert(props) {
+function Alert({ alert }) {
+	if (!alert) return null;
+	let word = alert.type;
+	if (word === "danger") {
+		word = "error";
+	}
+
 	return (
 		<div
-			className='alert alert-primary'
+			className={`alert alert-${alert.type} alert-dismissible fade show`}
 			role='alert'>
-			{props.message}
+			<strong>{alert.type.toUpperCase()}:</strong> {alert.message}
 		</div>
 	);
 }

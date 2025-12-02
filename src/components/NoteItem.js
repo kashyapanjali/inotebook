@@ -3,7 +3,7 @@ import NoteContext from "../context/notes/noteContext";
 
 function NoteItem(props) {
 	const { deleteNote } = useContext(NoteContext);
-	const { note, handleEditClick } = props;
+	const { note, handleEditClick, showAlert } = props;
 
 	return (
 		<div className='col-md-3'>
@@ -18,14 +18,15 @@ function NoteItem(props) {
 								style={{ cursor: "pointer" }}></i>
 							<i
 								className='fa-regular fa-trash-can mx-2'
-								onClick={() => deleteNote(note._id)}
+								onClick={() => {
+									deleteNote(note._id);
+									showAlert("Note deleted successfully", "success");
+								}}
 								style={{ cursor: "pointer" }}></i>
 						</div>
 					</div>
 					<p className='card-text'>{note.description}</p>
-					{note.tag && (
-						<span className='badge bg-secondary'>{note.tag}</span>
-					)}
+					{note.tag && <span className='badge bg-secondary'>{note.tag}</span>}
 				</div>
 			</div>
 		</div>
