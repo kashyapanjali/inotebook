@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import NoteItem from "./NoteItem";
 import NoteContext from "../context/notes/noteContext";
 import AddNote from "./AddNote";
+import { useNavigate } from "react-router-dom";
 
 function Notes(props) {
 	const context = useContext(NoteContext);
@@ -14,8 +15,15 @@ function Notes(props) {
 		tag: "",
 	});
 
+	const navigate = useNavigate();
+
 	useEffect(() => {
-		getNotes();
+		if (localStorage.getItem("token")) {
+			getNotes();
+		} else {
+			props.showAlert("Please login to access your notes", "warning");
+			navigate("/login");
+		}
 		// eslint-disable-next-line
 	}, []);
 

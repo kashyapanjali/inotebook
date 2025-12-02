@@ -9,7 +9,7 @@ function SignUp(props) {
 		confirmPassword: "",
 	});
 
-	const url = "http://localhost:3000";
+	const url = process.env.React_APP_API_URL;
 
 	const navigate = useNavigate();
 
@@ -18,7 +18,7 @@ function SignUp(props) {
 		//destructure password and confirm password
 		const { name, email, password } = credentials;
 
-		const response = await fetch(`${url}/api/v1/users`, {
+		const response = await fetch(`${url}/v1/users`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -45,8 +45,9 @@ function SignUp(props) {
 	const onChange = (e) => {
 		setCredentials({ ...credentials, [e.target.name]: e.target.value });
 	};
+
 	return (
-		<div className='container'>
+		<div className='container mt-5'>
 			<form onSubmit={handleSubmit}>
 				<div className='mb-3'>
 					<label

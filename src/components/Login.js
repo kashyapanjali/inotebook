@@ -7,13 +7,13 @@ function Login(props) {
 		password: "",
 	});
 
-	const url = "http://localhost:3000";
+	const url = process.env.React_APP_API_URL;
 
 	const navigate = useNavigate();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		const response = await fetch(`${url}/api/v1/users/login`, {
+		const response = await fetch(`${url}/v1/users/login`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -23,7 +23,6 @@ function Login(props) {
 				password: credentials.password,
 			}),
 		});
-
 		const json = await response.json();
 		if (json.success) {
 			//save the auth token and redirect
@@ -40,7 +39,7 @@ function Login(props) {
 	};
 
 	return (
-		<div>
+		<div className='container mt-5'>
 			<form onSubmit={handleSubmit}>
 				<div className='mb-3'>
 					<label
