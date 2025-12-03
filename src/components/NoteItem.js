@@ -6,27 +6,35 @@ function NoteItem(props) {
 	const { note, handleEditClick, showAlert } = props;
 
 	return (
-		<div className='col-md-3'>
-			<div className='card my-3'>
+		<div className='note-item'>
+			<div className='card'>
 				<div className='card-body'>
-					<div className='d-flex justify-content-between align-items-center'>
-						<h5 className='card-title'>{note.title}</h5>
-						<div>
+					<div className='d-flex justify-content-between align-items-start mb-3'>
+						<h5 className='card-title' style={{ flex: 1, marginRight: '1rem' }}>
+							{note.title}
+						</h5>
+						<div className='note-actions'>
 							<i
-								className='fa-regular fa-pen-to-square mx-2'
+								className='fa-regular fa-pen-to-square note-action-icon edit'
 								onClick={() => handleEditClick(note)}
-								style={{ cursor: "pointer" }}></i>
+								title='Edit note'></i>
 							<i
-								className='fa-regular fa-trash-can mx-2'
+								className='fa-regular fa-trash-can note-action-icon delete'
 								onClick={() => {
 									deleteNote(note._id);
 									showAlert("Note deleted successfully", "success");
 								}}
-								style={{ cursor: "pointer" }}></i>
+								title='Delete note'></i>
 						</div>
 					</div>
-					<p className='card-text'>{note.description}</p>
-					{note.tag && <span className='badge bg-secondary'>{note.tag}</span>}
+					<p className='card-text' style={{ marginBottom: '1rem', minHeight: '3rem' }}>
+						{note.description}
+					</p>
+					{note.tag && (
+						<span className='note-tag'>
+							🏷️ {note.tag}
+						</span>
+					)}
 				</div>
 			</div>
 		</div>

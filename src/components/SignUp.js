@@ -9,7 +9,7 @@ function SignUp(props) {
 		confirmPassword: "",
 	});
 
-	const url = process.env.React_APP_API_URL;
+	const url = process.env.REACT_APP_API_URL || "http://localhost:3000/api";
 
 	const navigate = useNavigate();
 
@@ -48,78 +48,98 @@ function SignUp(props) {
 
 	return (
 		<div className='container mt-5'>
-			<form onSubmit={handleSubmit}>
-				<div className='mb-3'>
-					<label
-						htmlFor='name'
-						className='form-label'>
-						Enter Name
-					</label>
-					<input
-						type='text'
-						className='form-control'
-						id='name'
-						name='name'
-						aria-describedby='emailHelp'
-						onChange={onChange}
-					/>
-				</div>
-				<div className='mb-3'>
-					<label
-						htmlFor='email'
-						className='form-label'>
-						Email address
-					</label>
-					<input
-						type='email'
-						className='form-control'
-						id='email'
-						aria-describedby='emailHelp'
-						name='email'
-						onChange={onChange}
-					/>
-					<div
-						id='emailHelp'
-						className='form-text'>
-						We'll never share your email with anyone else.
+			<div className='form-container'>
+				<h2>Create Account</h2>
+				<p style={{ textAlign: 'center', color: 'rgba(255, 255, 255, 0.7)', marginBottom: '2rem' }}>
+					Join iNotebook and start organizing your thoughts
+				</p>
+				<form onSubmit={handleSubmit}>
+					<div className='mb-3'>
+						<label
+							htmlFor='name'
+							className='form-label'>
+							Full Name
+						</label>
+						<input
+							type='text'
+							className='form-control'
+							id='name'
+							name='name'
+							placeholder='Enter your full name'
+							aria-describedby='nameHelp'
+							onChange={onChange}
+							required
+						/>
 					</div>
-				</div>
-				<div className='mb-3'>
-					<label
-						htmlFor='password'
-						className='form-label'>
-						Password
-					</label>
-					<input
-						type='password'
-						className='form-control'
-						id='password'
-						name='password'
-						onChange={onChange}
-						minLength={5}
-						required
-					/>
-				</div>
-				<div className='mb-3'>
-					<label
-						htmlFor='confirmPassword'
-						className='form-label'>
-						Confirm Password
-					</label>
-					<input
-						type='password'
-						className='form-control'
-						id='confirmPassword'
-						name='confirmPassword'
-						onChange={onChange}
-					/>
-				</div>
-				<button
-					type='submit'
-					className='btn btn-primary'>
-					Submit
-				</button>
-			</form>
+					<div className='mb-3'>
+						<label
+							htmlFor='email'
+							className='form-label'>
+							Email address
+						</label>
+						<input
+							type='email'
+							className='form-control'
+							id='email'
+							aria-describedby='emailHelp'
+							name='email'
+							placeholder='Enter your email'
+							onChange={onChange}
+							required
+						/>
+						<div
+							id='emailHelp'
+							className='form-text'>
+							We'll never share your email with anyone else.
+						</div>
+					</div>
+					<div className='mb-3'>
+						<label
+							htmlFor='password'
+							className='form-label'>
+							Password
+						</label>
+						<input
+							type='password'
+							className='form-control'
+							id='password'
+							name='password'
+							placeholder='Create a password (min. 5 characters)'
+							onChange={onChange}
+							minLength={5}
+							required
+						/>
+					</div>
+					<div className='mb-3'>
+						<label
+							htmlFor='confirmPassword'
+							className='form-label'>
+							Confirm Password
+						</label>
+						<input
+							type='password'
+							className='form-control'
+							id='confirmPassword'
+							name='confirmPassword'
+							placeholder='Confirm your password'
+							onChange={onChange}
+							required
+						/>
+					</div>
+					<button
+						type='submit'
+						className='btn btn-primary w-100'
+						style={{ marginTop: '1rem' }}>
+						Create Account
+					</button>
+					<p style={{ textAlign: 'center', marginTop: '1.5rem', color: 'rgba(255, 255, 255, 0.7)' }}>
+						Already have an account?{' '}
+						<a href='/login' style={{ color: '#818cf8', textDecoration: 'none', fontWeight: '500' }}>
+							Sign in here
+						</a>
+					</p>
+				</form>
+			</div>
 		</div>
 	);
 }

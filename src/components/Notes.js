@@ -149,21 +149,34 @@ function Notes(props) {
 					className='modal-backdrop fade show'
 					onClick={handleClose}></div>
 			)}
-			<div className='row my-3'>
-				<h2>Your Notes</h2>
-				<div className='container mx-2'>
-					{notes.length === 0 && "No notes to display"}
+			<div className='notes-container'>
+				<div className='notes-header'>
+					<h2>📝 Your Notes</h2>
+					<p style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '1.125rem' }}>
+						{notes.length === 0 
+							? "Start by adding your first note above!" 
+							: `You have ${notes.length} ${notes.length === 1 ? 'note' : 'notes'}`}
+					</p>
 				</div>
-				{notes.map((note) => {
-					return (
-						<NoteItem
-							key={note._id}
-							note={note}
-							handleEditClick={handleEditClick}
-							showAlert={props.showAlert}
-						/>
-					);
-				})}
+				{notes.length === 0 ? (
+					<div className='empty-notes'>
+						<p style={{ fontSize: '1.25rem', marginBottom: '1rem' }}>📭</p>
+						<p>No notes to display. Create your first note above!</p>
+					</div>
+				) : (
+					<div className='notes-grid'>
+						{notes.map((note) => {
+							return (
+								<NoteItem
+									key={note._id}
+									note={note}
+									handleEditClick={handleEditClick}
+									showAlert={props.showAlert}
+								/>
+							);
+						})}
+					</div>
+				)}
 			</div>
 		</>
 	);

@@ -22,9 +22,9 @@ function AddNote(props) {
 		setNote({ ...note, [e.target.name]: e.target.value });
 	};
 	return (
-		<div className='container my-3'>
-			<h2>Add a Note</h2>
-			<form className='my-3'>
+		<div className='add-note-container'>
+			<h2>➕ Add a Note</h2>
+			<form onSubmit={handleClick}>
 				<div className='mb-3'>
 					<label
 						htmlFor='title'
@@ -36,10 +36,12 @@ function AddNote(props) {
 						className='form-control'
 						id='title'
 						name='title'
-						minLength={15}
+						minLength={5}
 						value={note.title}
+						placeholder='Enter note title (min. 5 characters)'
 						aria-describedby='titleHelp'
 						onChange={onChange}
+						required
 					/>
 				</div>
 				<div className='mb-3'>
@@ -48,15 +50,17 @@ function AddNote(props) {
 						className='form-label'>
 						Description
 					</label>
-					<input
-						type='text'
+					<textarea
 						className='form-control'
 						id='description'
 						name='description'
-						minLength={15}
+						rows='4'
+						minLength={5}
 						value={note.description}
+						placeholder='Enter note description (min. 5 characters)'
 						aria-describedby='descHelp'
 						onChange={onChange}
+						required
 					/>
 				</div>
 				<div className='mb-3'>
@@ -71,15 +75,16 @@ function AddNote(props) {
 						id='tag'
 						name='tag'
 						value={note.tag}
-						aria-describedby='descHelp'
+						placeholder='e.g., Personal, Work, Ideas (optional)'
+						aria-describedby='tagHelp'
 						onChange={onChange}
 					/>
 				</div>
 				<button
 					type='submit'
-					className='btn btn-primary'
+					className='btn btn-primary w-100'
 					onClick={handleClick}>
-					Add Note
+					✨ Add Note
 				</button>
 			</form>
 		</div>
