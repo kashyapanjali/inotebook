@@ -9,7 +9,7 @@ function SignUp(props) {
 		confirmPassword: "",
 	});
 
-	const url = process.env.REACT_APP_API_URL || "http://localhost:3000/api";
+	const url = process.env.REACT_APP_API_URL;
 
 	const navigate = useNavigate();
 
@@ -31,7 +31,6 @@ function SignUp(props) {
 		});
 
 		const json = await response.json();
-		console.log(json);
 		if (json.success) {
 			//create token
 			localStorage.setItem("token", json.authToken);
@@ -50,7 +49,12 @@ function SignUp(props) {
 		<div className='container mt-5'>
 			<div className='form-container'>
 				<h2>Create Account</h2>
-				<p style={{ textAlign: 'center', color: 'rgba(255, 255, 255, 0.7)', marginBottom: '2rem' }}>
+				<p
+					style={{
+						textAlign: "center",
+						color: "rgba(255, 255, 255, 0.7)",
+						marginBottom: "2rem",
+					}}>
 					Join iNotebook and start organizing your thoughts
 				</p>
 				<form onSubmit={handleSubmit}>
@@ -129,12 +133,23 @@ function SignUp(props) {
 					<button
 						type='submit'
 						className='btn btn-primary w-100'
-						style={{ marginTop: '1rem' }}>
+						style={{ marginTop: "1rem" }}>
 						Create Account
 					</button>
-					<p style={{ textAlign: 'center', marginTop: '1.5rem', color: 'rgba(255, 255, 255, 0.7)' }}>
-						Already have an account?{' '}
-						<a href='/login' style={{ color: '#818cf8', textDecoration: 'none', fontWeight: '500' }}>
+					<p
+						style={{
+							textAlign: "center",
+							marginTop: "1.5rem",
+							color: "rgba(255, 255, 255, 0.7)",
+						}}>
+						Already have an account?{" "}
+						<a
+							href='/login'
+							style={{
+								color: "#818cf8",
+								textDecoration: "none",
+								fontWeight: "500",
+							}}>
 							Sign in here
 						</a>
 					</p>

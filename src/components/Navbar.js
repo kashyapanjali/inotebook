@@ -13,12 +13,12 @@ function Navbar() {
 	let location = useLocation();
 
 	return (
-		<nav className='navbar navbar-expand-lg navbar-dark'>
+		<nav className='navbar navbar-expand-lg navbar-dark fixed-top'>
 			<div className='container-fluid'>
 				<Link
 					className='navbar-brand'
 					to='/'>
-					📓 iNotebook
+					📙 iNotebook
 				</Link>
 				<button
 					className='navbar-toggler'
@@ -50,7 +50,7 @@ function Navbar() {
 							</Link>
 						</li>
 					</ul>
-					{!localStorage.getItem("token") ? (
+					{!localStorage.getItem("token") ?
 						<div className='d-flex gap-2'>
 							<Link
 								className='btn btn-primary'
@@ -65,13 +65,12 @@ function Navbar() {
 								Sign Up
 							</Link>
 						</div>
-					) : (
-						<button
+					:	<button
 							onClick={handleLogout}
 							className='btn btn-primary'>
 							Logout
 						</button>
-					)}
+					}
 				</div>
 			</div>
 		</nav>

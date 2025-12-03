@@ -7,7 +7,7 @@ function Login(props) {
 		password: "",
 	});
 
-	const url = process.env.REACT_APP_API_URL || "http://localhost:3000/api";
+	const url = process.env.REACT_APP_API_URL;
 
 	const navigate = useNavigate();
 
@@ -30,7 +30,7 @@ function Login(props) {
 			navigate("/");
 			props.showAlert("Successfull login", "success");
 		} else {
-			props.showAlert("Invalid Details", "danger");
+			props.showAlert("User not found", "danger");
 		}
 	};
 

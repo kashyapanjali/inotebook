@@ -28,7 +28,7 @@ function App() {
 				<Router>
 					<Navbar />
 					<Alert alert={alert} />
-					<div className='container'>
+					<div className='container page-content'>
 						<Routes>
 							<Route
 								path='/'

@@ -2,7 +2,7 @@ import { useState } from "react";
 import NoteContext from "./noteContext";
 
 const NoteState = (props) => {
-	const url = process.env.REACT_APP_API_URL || "http://localhost:3000/api";
+	const url = process.env.REACT_APP_API_URL;
 
 	const initialNotes = [];
 	const [notes, setNotes] = useState(initialNotes);
@@ -46,7 +46,10 @@ const NoteState = (props) => {
 		});
 
 		const json = await response.json();
-		console.log("Delete Note:", json);
+		if (!response.ok) {
+			console.error("not delete:", json);
+			return;
+		}
 		const newNotes = notes.filter((note) => {
 			return note._id !== id;
 		});
